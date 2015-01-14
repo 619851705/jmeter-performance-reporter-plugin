@@ -1,0 +1,69 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <l:layout xmlns:jm="/hudson/plugins/jfr/tags" css="/plugin/jfr-plugin/css/style.css">
+  <st:include it="${it.build}" page="sidepanel.jelly" />
+    <l:main-panel>
+    <j:set var="fileName" value="${it.getFilename()}" />
+    <j:set var="reportSummary" value="${it.getReportResultSummary(fileName)}" />
+   
+			<h1>Performance Report (${fileName})</h1>
+			<table cellspacing="0" border="1">
+    	<caption style="font-size: x-large;color: deepblack">Aggregate Graph</caption>
+    		<tr>
+			<th align="center" style="width: 100px" bgcolor="lightgrey" >Label</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey"># Samples</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Average(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Median(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">90%Line(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Min(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Max(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Error(%)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Throughtput(/sec)</th>
+		</tr>
+		<j:forEach var="mapReport" items="${it.getAggregate(fileName)}">
+		
+		<tr>
+			<td align="left" style="width: 100px; color: black">${mapReport.key}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getSamples()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getAverage()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getMedian()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getLine90()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getMin()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getMax()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getErrorPerString()}</td>
+			<td align="center" style="width: 100px; color: black">${mapReport.value.getAverageTpsString()}</td>
+		</tr>
+		</j:forEach>
+		<tr>
+			<td align="left" style="width: 100px; color: black">TOTAL</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getSamples()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getAverage()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getMedian()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getLine90()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getMin()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getMax()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getErrorPerString()}</td>
+			<td align="center" style="width: 100px; color: black">${reportSummary.getAverageTpsString()}</td>
+		</tr>
+    	</table>
+			<j:if test="${it.isTps()=='true'}">
+			<a href="./getTpsGraph" 
+         		target="_blank" title="Click for larger image">
+            	<img class="trend" src="./getTpsGraph?fileName=${fileName}" width="1000" height="600" />
+            </a>
+			</j:if>
+			<j:if test="${it.isResponseTimesOverTime()=='true'}">
+			<a href="./getResponseTimesOverTimeGraph" 
+         		target="_blank" title="Click for larger image">
+            	<img class="trend" src="./getResponseTimesOverTimeGraph?fileName=${fileName}" width="1000" height="600" />
+            </a>
+			</j:if>
+			<j:if test="${it.isResponseTimesDistribution()=='true'}">
+			<a href="./getResponseTimesDistributionGraph" 
+         		target="_blank" title="Click for larger image">
+            	<img class="trend" src="./getResponseTimesDistributionGraph?fileName=${fileName}" width="1000" height="600" />
+            </a>
+			</j:if>
+    </l:main-panel>
+  </l:layout>
+</j:jelly>

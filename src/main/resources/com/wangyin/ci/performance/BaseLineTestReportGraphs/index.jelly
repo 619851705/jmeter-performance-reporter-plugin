@@ -1,0 +1,40 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <l:layout xmlns:jm="/hudson/plugins/jfr/tags" css="/plugin/jfr-plugin/css/style.css">
+  <st:include it="${it.build}" page="sidepanel.jelly" />
+    <l:main-panel>
+    <j:set var="fileName" value="${it.getFilename()}" />
+    <j:set var="reportResultList" value="${it.getReportResultList(fileName)}" />
+			<h1>Transaction Name : ${fileName}</h1>
+			<table cellspacing="0" border="1">
+    	<caption style="font-size: x-large;color: deepblack">Aggregate Graph</caption>
+    		<tr>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Concurrent Counts</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Average(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Median(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">90%Line(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Min(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Max(ms)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Error(%)</th>
+			<th align="center" style="width: 100px" bgcolor="lightgrey">Throughtput(/sec)</th>
+		</tr>
+		<j:forEach var="reportResult" items="${reportResultList}">
+		<tr>
+			<td align="center" style="width: 100px; color: black">${reportResult.getThreads()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getAverage()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getMedian()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getLine90()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getMin()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getMax()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getErrorPerString()}</td>
+			<td align="center" style="width: 100px; color: black">${reportResult.getAverageTpsString()}</td>
+		</tr>
+		</j:forEach>
+    	</table>
+			<a href="./getBaseTestGraph?fileName=${fileName}" 
+         		target="_blank" title="Click for larger image">
+            	<img class="trend" src="./getBaseTestGraph?fileName=${fileName}" width="1000" height="600" />
+            </a>
+    </l:main-panel>
+  </l:layout>
+</j:jelly>

@@ -1,0 +1,18 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+   <f:entry title="Report Files" field="filePath">
+    <f:textbox default="**/*.csv"/>
+  </f:entry>
+  <f:entry title="Runner Type" field="runnerType">
+  <f:radio name="runnerType" title="JMeter" value="Jmeter" checked="${instance.runnerType=='Jmeter' or instance.runnerType==null}"/>
+  <f:radio name="runnerType" title="AK47" value="AK47" checked="${instance.runnerType=='AK47'}"/>
+  </f:entry>
+  <f:entry title="Reporter Mode">
+  <f:checkbox name="tps" title="Tps" field="Tps" checked="${instance.tpsString=='true' or instance.tpsString==null}"/>
+  <f:checkbox name="responseTimesOverTime" title="ResponseTimesOverTime" field="responseTimesOverTime" checked="${instance.responseTimesOverTimeString=='true' or instance.responseTimesOverTimeString==null}"/>
+  <f:checkbox name="responseTimesDistribution" title="ResponseTimesDistribution" field="responseTimesDistribution" checked="${instance.responseTimesDistributionString=='true' or instance.responseTimesDistributionString==null}" />
+  </f:entry>
+  <f:entry title="Email Recipients" field="recipients" value="${instance.recipients}">
+    <f:textbox />
+  </f:entry>
+</j:jelly>

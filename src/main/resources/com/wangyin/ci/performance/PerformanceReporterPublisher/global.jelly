@@ -1,0 +1,23 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+<f:section title="Perfromance Reporter">
+    <f:entry title="Email_User" field="emailUser">
+    <f:textbox/> 
+  </f:entry>
+  <f:entry title="Email_Password" field="emailPassword">
+    <f:password/>
+    </f:entry>
+    <f:entry title="Email_Addresser" field="emailAddresser">
+    <f:textbox/> 
+  </f:entry>
+    <f:entry title="Email_Default_Suffix" field="emailDefaultSuffix">
+    <f:textbox/>
+    </f:entry>
+    <f:entry title="Email_Host" field="emailHost">
+    <f:textbox/>
+    </f:entry>
+    <f:entry title="Email_Port" field="emailPort">
+    <f:textbox default="25"/>
+    </f:entry>
+  </f:section> 
+</j:jelly>
+
