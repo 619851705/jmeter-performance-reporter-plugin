@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 
  */
 package com.wangyin.ci.performance;
@@ -51,7 +51,9 @@ import com.wangyin.ci.performance.util.SummaryReportUtil;
  * @date 2014年7月2日
  */
 public class PerformanceReporterPublisher extends Recorder {
-	private String runnerType;
+	//private String runnerType;
+	private String runnerType="Jmeter";
+	
 	
 	private String filePath;
 	
@@ -121,7 +123,7 @@ public class PerformanceReporterPublisher extends Recorder {
 	
 	@DataBoundConstructor
 	public PerformanceReporterPublisher(String runnerType, String filePath, String recipients, boolean tps, boolean responseTimesOverTime, boolean responseTimesDistribution) {
-		this.runnerType = runnerType;
+		//this.runnerType = runnerType;
 		this.filePath = filePath;
 		this.recipients = recipients;
 		this.tps = tps;
@@ -269,7 +271,7 @@ public class PerformanceReporterPublisher extends Recorder {
         	return false;
         }
 		ps.println("tps :" + tps);
-		ps.println("runnerType :" + runnerType);
+		//ps.println("runnerType :" + runnerType);
 		ps.println("responseTimesOverTime: " + responseTimesOverTime);
 		ps.println("responseTimesDistribution: " + responseTimesDistribution);
 		ps.println("Report files :"+filePath);

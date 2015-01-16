@@ -3,10 +3,11 @@
    <f:entry title="Report Files" field="filePath">
     <f:textbox default="**/*.csv"/>
   </f:entry>
-  <f:entry title="Runner Type" field="runnerType">
+  <!-- ak47 stress-->
+  <!--<f:entry title="Runner Type" field="runnerType">
   <f:radio name="runnerType" title="JMeter" value="Jmeter" checked="${instance.runnerType=='Jmeter' or instance.runnerType==null}"/>
   <f:radio name="runnerType" title="AK47" value="AK47" checked="${instance.runnerType=='AK47'}"/>
-  </f:entry>
+  </f:entry>-->
   <f:entry title="Reporter Mode">
   <f:checkbox name="tps" title="Tps" field="Tps" checked="${instance.tpsString=='true' or instance.tpsString==null}"/>
   <f:checkbox name="responseTimesOverTime" title="ResponseTimesOverTime" field="responseTimesOverTime" checked="${instance.responseTimesOverTimeString=='true' or instance.responseTimesOverTimeString==null}"/>
